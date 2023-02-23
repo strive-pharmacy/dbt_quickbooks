@@ -343,10 +343,12 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
+            - transaction_id
+            - transaction_index
             - account_id
-            - class_id
-            - source_relation 
-            - period_first_day
+            - transaction_type
+            - transaction_source
+            - source_relation  
     columns:
       - name: account_id
         description: "{{ doc('account_id') }} with the period balance transactions."
