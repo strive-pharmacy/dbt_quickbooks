@@ -286,7 +286,11 @@ models:
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
-            - unique_id
+            - transaction_id
+            - transaction_index
+            - account_id
+            - transaction_type
+            - transaction_source
             - source_relation   
     columns:
       - name: unique_id
