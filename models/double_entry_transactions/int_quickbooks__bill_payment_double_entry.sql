@@ -26,7 +26,8 @@ accounts as (
 ap_accounts as (
 
     select
-        account_id
+        account_id,
+        source_relation
     from accounts
     
     where account_type = 'Accounts Payable'
@@ -46,7 +47,10 @@ bill_payment_join as (
         bill_payments.vendor_id
     from bill_payments
 
-    cross join ap_accounts
+    LEFT JOIN ap_accounts ON ap_accounts.source_relation = bill_payments.source_relation
+    -- cross join ap_accounts
+    -- this is a devation from the fivetran production model.  this cross join was causing issues because of the account_id misalignment across entities.  it was causing fanning at all locations on any ID that was an AP account.
+    -- this new join adds source relation and seems to fix the issue.
 
 ),
 
